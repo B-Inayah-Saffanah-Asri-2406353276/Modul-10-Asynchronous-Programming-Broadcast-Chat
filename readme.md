@@ -13,3 +13,7 @@ Dijalankan menggunakan command `cargo run --bin server` untuk server dan `cargo 
 **Modifying both client and server**
 ![alt text](image-3.png)
 Perubahan port harus dimodifikasi pada kedua sisi, yaitu client dan server. Port pada server didefinisikan dalam fungsi `let listener = TcpListener::bind("127.0.0.1:8080").await?`. Jika port keduanya berbeda, akan terjadi error `ConnectionRefused` karena client mencoba menghubungi port yang tidak dibuka oleh server.
+
+### Add some information to client
+![alt text](image-4.png)
+Agar client mendapatkan informasi mengenai IP dan port dari sender pesannya, saya menambahkan `let formatted_msg = format!("{addr}: {text}")` dan mengubah `bcast_tx.send(formatted_msg)?` sehingga pesan yang dipass ke client bukan hanya text, melainkan IP, port, dan text.
